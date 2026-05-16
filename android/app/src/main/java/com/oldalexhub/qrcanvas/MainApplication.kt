@@ -1,4 +1,4 @@
-package com.qrcanvas
+package com.oldalexhub.qrcanvas
 
 import android.app.Application
 import com.facebook.react.PackageList

@@ -1,0 +1,7 @@
+Initial release.
+
+- Create QR codes offline for links, text, contacts, Wi-Fi, email, phone, SMS, events, locations, social/profile links, and custom payloads.
+- Style QR cards with 12 built-in templates and custom colors.
+- Save, edit, duplicate, delete, and search local QR projects.
+- Export PNG images and JSON backups from the device.
+- No login, no ads, and no internet required.

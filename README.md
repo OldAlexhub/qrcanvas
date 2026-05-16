@@ -1,97 +1,154 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# QRCanvas
 
-# Getting Started
+QRCanvas is a modern offline QR design studio for Android. It creates polished QR codes for websites, text, contact cards, Wi-Fi access, email, phone, SMS, calendar events, locations, social/profile links, and custom payloads.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+Main tagline: Design beautiful QR codes offline.
 
-## Step 1: Start Metro
+Developer: Old Alex Hub
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Features
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- Offline QR code generation with no backend and no login.
+- Smart forms for website, text, vCard, Wi-Fi, email, phone, SMS, calendar event, location, social/profile, and custom payloads.
+- 12 built-in design templates.
+- Custom foreground, background, card color, title, subtitle, footer, card radius, QR size, and center badge text.
+- Local saved project library with search, filter, sort, duplicate, edit, delete, and export flows.
+- PNG export through the local Android share flow.
+- JSON backup export for individual projects and the full local library.
+- JSON import by pasting a QRCanvas backup in Settings.
+- Privacy policy and Google Play store asset notes included.
+
+## Offline-first design
+
+QRCanvas generates QR payloads and renders QR images on-device. Templates are bundled with the app. Saved projects and preferences use local AsyncStorage keys. The app does not need an internet connection to create, edit, save, export, import, or delete QR designs.
+
+## No login and no backend
+
+QRCanvas does not use accounts, cloud sync, analytics, ads, subscriptions, backend APIs, short links, or hosted campaigns. All QR content is user-entered and remains on the device unless the user exports or shares it.
+
+## Local storage
+
+Projects are stored under versioned QRCanvas AsyncStorage keys. Settings are stored locally. Resetting data from Settings clears only this app's local keys. JSON backup export includes project metadata, payload data, template choice, design settings, created date, updated date, and generated date.
+
+## Requirements
+
+- Node.js compatible with the React Native version in `package.json`
+- JDK 17 or the Android Studio bundled JBR
+- Android Studio with Android SDK, platform-tools, platforms, and build-tools
+- Android emulator or Android device for local testing
+
+## Run the app
 
 ```sh
-# Using npm
-npm start
-
-# OR using Yarn
-yarn start
-```
-
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
+npm install
 npm run android
-
-# OR using Yarn
-yarn android
 ```
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+Start Metro separately if needed:
 
 ```sh
-bundle install
+npm start
 ```
 
-Then, and every time you update your native dependencies, run:
+## Build debug
 
 ```sh
-bundle exec pod install
+cd android
+gradlew.bat assembleDebug
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+On macOS/Linux:
 
 ```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+cd android
+./gradlew assembleDebug
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## Build release
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+The recommended release flow is the parent `release.py` script because it configures Java, Android SDK, `local.properties`, signing files, APK/AAB builds, release folders, docs, store assets, branding, and optional screenshots.
 
-## Step 3: Modify your app
+From the parent directory:
 
-Now that you have successfully run the app, let's make changes!
+```sh
+python release.py
+```
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+The main Google Play upload artifact is:
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+```text
+releases/builds/QRCanvas-release.aab
+```
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+The APK is also copied to:
 
-## Congratulations! :tada:
+```text
+releases/builds/QRCanvas-release.apk
+```
 
-You've successfully run and modified your React Native App. :partying_face:
+## release.py usage
 
-### Now what?
+Run these from the parent directory that contains `qrcanvas`:
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+```sh
+python release.py --check-env
+python release.py --generate-key-only
+python release.py --skip-screenshots
+python release.py --skip-build
+python release.py --screenshots-only
+python release.py --clean
+python release.py --no-clean
+```
 
-# Troubleshooting
+`--check-env` prints Java, keytool, Android SDK, `ANDROID_HOME`, `ANDROID_SDK_ROOT`, `local.properties`, `sdk.dir`, adb, Gradle wrapper, and whether APK/AAB builds should be possible.
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+## Generate signing key only
 
-# Learn More
+```sh
+python release.py --generate-key-only
+```
 
-To learn more about React Native, take a look at the following resources:
+This creates `android/keystore/qrcanvas-release.keystore` and `android/keystore/keystore.properties` if they are missing. Existing keystore files are not overwritten.
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Back up the keystore and passwords safely. Losing the upload key can block future app updates in Google Play.
+
+## Capture screenshots
+
+Connect an emulator or Android device and run:
+
+```sh
+python release.py --screenshots-only
+```
+
+The script asks you to open each screen and press Enter to capture. Screenshots are saved under `releases/screenshots`.
+
+## Google Play upload notes
+
+- Use `QRCanvas-release.aab` for Google Play.
+- Keep package name `com.oldalexhub.qrcanvas`.
+- Confirm the app display name is `QRCanvas`.
+- Confirm no camera, contacts, location, internet, or external storage permission is requested.
+- Use the files in `store_assets` for listing copy, release notes, screenshot captions, and data safety notes.
+- Suggested category: Tools or Productivity.
+- Suggested tags: QR generator, QR design, offline utility, business tools, creator tools.
+
+## Environment troubleshooting
+
+If the build fails with “ANDROID_HOME is not set” or “SDK location not found,” run:
+
+python release.py --check-env
+
+release.py should automatically detect the Android SDK from Android Studio, write android/local.properties, and set ANDROID_HOME and ANDROID_SDK_ROOT for the build process. If detection fails, manually install Android Studio and confirm the SDK exists under the normal Android SDK location.
+
+## Android SDK and local.properties
+
+`release.py` detects SDK locations in common Windows, macOS, and Linux paths, validates platform-tools, adb, platforms, and build-tools, then writes `android/local.properties` with a forward-slash `sdk.dir` path. The file is local-machine config and is ignored by git.
+
+## Troubleshooting
+
+- If Gradle cannot find Java, install Android Studio or set `JAVA_HOME` to a JDK/JBR path.
+- If `keytool` is missing, verify `JAVA_HOME/bin` exists.
+- If `adb` is unavailable, screenshots are skipped with a warning, but builds can continue.
+- If native modules are missing, run `npm install` again from the app root.
+- If release signing fails, run `python release.py --generate-key-only` from the parent directory.
+- If a QR design is hard to scan, increase contrast, use a lighter QR background, reduce badge text, or export a larger size.

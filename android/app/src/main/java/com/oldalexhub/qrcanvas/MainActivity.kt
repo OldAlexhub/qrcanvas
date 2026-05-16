@@ -1,4 +1,4 @@
-package com.qrcanvas
+package com.oldalexhub.qrcanvas
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

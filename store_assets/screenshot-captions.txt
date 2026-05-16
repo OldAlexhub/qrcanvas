@@ -1,0 +1,6 @@
+1. Start from the dashboard with quick QR actions and recent designs.
+2. Choose a smart QR form for links, Wi-Fi, contacts, events, and more.
+3. Customize QR colors, card styling, text, templates, and badge options.
+4. Manage saved QR designs in the local library.
+5. Preview PNG export sizes and create JSON backups.
+6. Control offline preferences, privacy, import, export, and local reset tools.

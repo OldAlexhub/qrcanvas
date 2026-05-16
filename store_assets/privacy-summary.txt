@@ -1,0 +1,1 @@
+QRCanvas does not collect or share personal data. QR content, saved projects, templates, and settings are stored locally on the device. The app is designed to work offline and does not require camera, contacts, location, internet, or account access. Users can delete individual projects or reset all QRCanvas local data from Settings.

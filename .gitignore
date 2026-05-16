@@ -32,6 +32,8 @@ local.properties
 *.hprof
 .cxx/
 *.keystore
+android/keystore/keystore.properties
+android/keystore/*.keystore
 !debug.keystore
 .kotlin/
 
@@ -73,3 +75,4 @@ yarn-error.log
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+android/local.properties
