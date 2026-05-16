@@ -1,5 +1,4 @@
 import React from 'react';
-import {StyleSheet, Text} from 'react-native';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -13,6 +12,7 @@ import {ExportPreviewScreen} from '../screens/ExportPreviewScreen';
 import {PrivacyPolicyScreen} from '../screens/PrivacyPolicyScreen';
 import {theme} from '../data/theme';
 import {MainTabParamList, RootStackParamList} from './types';
+import {TabBarIcon, TabBarIconName} from '../components/TabBarIcon';
 
 const isJest = Boolean(
   (globalThis as {process?: {env?: Record<string, string | undefined>}}).process?.env
@@ -35,10 +35,10 @@ const navigationTheme = {
   },
 };
 
-const tabIcon = (label: string, focused: boolean) => (
-  <Text style={[styles.tabIcon, focused ? styles.tabIconActive : styles.tabIconInactive]}>
-    {label}
-  </Text>
+const tabIcon = (name: TabBarIconName) => (
+  {focused, color, size}: {focused: boolean; color: string; size: number},
+) => (
+  <TabBarIcon name={name} focused={focused} color={color} size={size} />
 );
 
 const MainTabs = () => (
@@ -61,22 +61,22 @@ const MainTabs = () => (
     <Tab.Screen
       name="Home"
       component={HomeScreen}
-      options={{tabBarIcon: ({focused}) => tabIcon('HM', focused)}}
+      options={{tabBarIcon: tabIcon('home')}}
     />
     <Tab.Screen
       name="Create"
       component={CreateScreen}
-      options={{tabBarIcon: ({focused}) => tabIcon('QR', focused)}}
+      options={{tabBarIcon: tabIcon('create')}}
     />
     <Tab.Screen
       name="Library"
       component={LibraryScreen}
-      options={{tabBarIcon: ({focused}) => tabIcon('LB', focused)}}
+      options={{tabBarIcon: tabIcon('library')}}
     />
     <Tab.Screen
       name="Settings"
       component={SettingsScreen}
-      options={{tabBarIcon: ({focused}) => tabIcon('ST', focused)}}
+      options={{tabBarIcon: tabIcon('settings')}}
     />
   </Tab.Navigator>
 );
@@ -91,16 +91,3 @@ export const AppNavigator = () => (
     </Stack.Navigator>
   </NavigationContainer>
 );
-
-const styles = StyleSheet.create({
-  tabIcon: {
-    fontWeight: '900',
-    fontSize: 12,
-  },
-  tabIconActive: {
-    color: theme.colors.primary,
-  },
-  tabIconInactive: {
-    color: '#7C8992',
-  },
-});

@@ -2,9 +2,9 @@
 
 Developer: Old Alex Hub
 
-Effective date: [Add effective date]
+Effective date: May 16, 2026
 
-Contact: [Add support contact]
+Contact: info@oldalexhub.com
 
 ## Data collection
 
