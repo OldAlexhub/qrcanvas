@@ -89,7 +89,7 @@ android {
         applicationId "com.oldalexhub.qrcanvas"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
+        versionCode 2
         versionName "1.0.0"
     }
     signingConfigs {
@@ -123,6 +123,7 @@ android {
 
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
+    implementation("androidx.core:core-ktx:1.17.0")
     implementation("com.facebook.react:react-android")
 
     if (hermesEnabled.toBoolean()) {

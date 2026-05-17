@@ -8,7 +8,7 @@ type Props = PropsWithChildren<{
 }>;
 
 export const Screen = ({children, scroll = true}: Props) => (
-  <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
+  <SafeAreaView style={styles.safe} edges={['top', 'bottom', 'left', 'right']}>
     {scroll ? (
       <ScrollView
         keyboardShouldPersistTaps="handled"
