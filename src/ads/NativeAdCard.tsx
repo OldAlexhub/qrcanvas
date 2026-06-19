@@ -1,24 +1,32 @@
-import React, {useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {
-  CallToActionView,
-  HeadlineView,
+  NativeAd,
   NativeAdView,
+  NativeAsset,
+  NativeAssetType,
   NativeMediaView,
-  TaglineView,
-  useNativeAd,
 } from 'react-native-google-mobile-ads';
 import {theme} from '../data/theme';
 import {AD_REQUEST_OPTIONS, AD_UNIT_IDS} from './config';
 
 export const NativeAdCard = () => {
-  const {isLoaded, load, nativeAd} = useNativeAd(AD_UNIT_IDS.native, AD_REQUEST_OPTIONS);
+  const [nativeAd, setNativeAd] = useState<NativeAd | null>(null);
 
   useEffect(() => {
-    load();
-  }, [load]);
+    let ad: NativeAd | null = null;
+    NativeAd.createForAdRequest(AD_UNIT_IDS.native, AD_REQUEST_OPTIONS)
+      .then(loaded => {
+        ad = loaded;
+        setNativeAd(loaded);
+      })
+      .catch(() => {});
+    return () => {
+      ad?.destroy();
+    };
+  }, []);
 
-  if (!isLoaded || !nativeAd) {
+  if (!nativeAd) {
     return null;
   }
 
@@ -28,13 +36,21 @@ export const NativeAdCard = () => {
         <NativeMediaView style={styles.media} />
         <View style={styles.body}>
           <View style={styles.headlineRow}>
-            <HeadlineView style={styles.headline} />
+            <NativeAsset assetType={NativeAssetType.HEADLINE}>
+              <Text style={styles.headline}>{nativeAd.headline}</Text>
+            </NativeAsset>
             <View style={styles.adBadge}>
               <Text style={styles.adBadgeText}>Ad</Text>
             </View>
           </View>
-          <TaglineView style={styles.tagline} />
-          <CallToActionView style={styles.ctaButton} textStyle={styles.ctaText} />
+          <NativeAsset assetType={NativeAssetType.BODY}>
+            <Text style={styles.tagline}>{nativeAd.body}</Text>
+          </NativeAsset>
+          <NativeAsset assetType={NativeAssetType.CALL_TO_ACTION}>
+            <TouchableOpacity style={styles.ctaButton}>
+              <Text style={styles.ctaText}>{nativeAd.callToAction}</Text>
+            </TouchableOpacity>
+          </NativeAsset>
         </View>
       </View>
     </NativeAdView>

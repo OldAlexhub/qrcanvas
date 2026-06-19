@@ -18,7 +18,7 @@
     "react": "19.2.3",
     "react-native": "0.85.3",
     "react-native-fs": "^2.20.0",
-    "react-native-google-mobile-ads": "^14.11.0",
+    "react-native-google-mobile-ads": "^16.3.4",
     "react-native-qrcode-svg": "^6.3.21",
     "react-native-safe-area-context": "^5.5.2",
     "react-native-screens": "^4.25.0",
