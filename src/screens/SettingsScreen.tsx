@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Alert, Modal, ScrollView, StyleSheet, Text, TextInput, View, Switch} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Screen} from '../components/Screen';
+import {AdBanner} from '../ads/AdBanner';
 import {Chip} from '../components/Chip';
 import {PrimaryButton} from '../components/PrimaryButton';
 import {templates} from '../data/templates';
@@ -64,7 +65,7 @@ export const SettingsScreen = () => {
   };
 
   return (
-    <Screen>
+    <Screen footer={<AdBanner />}>
       <View style={styles.header}>
         <Text style={styles.eyebrow}>Settings</Text>
         <Text style={styles.title}>Local preferences</Text>

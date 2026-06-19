@@ -2,7 +2,7 @@
 
 Developer: Old Alex Hub
 
-Effective date: May 16, 2026
+Effective date: June 19, 2026
 
 Contact: info@oldalexhub.com
 
