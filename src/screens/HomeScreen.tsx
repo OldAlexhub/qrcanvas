@@ -7,6 +7,7 @@ import {EmptyState} from '../components/EmptyState';
 import {ProjectCard} from '../components/ProjectCard';
 import {TemplateCard} from '../components/TemplateCard';
 import {Chip} from '../components/Chip';
+import {AdBanner} from '../ads/AdBanner';
 import {templates} from '../data/templates';
 import {theme} from '../data/theme';
 import {useAppState} from '../context/AppState';
@@ -49,7 +50,7 @@ export const HomeScreen = () => {
   };
 
   return (
-    <Screen>
+    <Screen footer={<AdBanner />}>
       <View style={styles.hero}>
         <Text style={styles.brand}>QRCanvas</Text>
         <Text style={styles.tagline}>Design beautiful QR codes offline.</Text>

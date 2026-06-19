@@ -150,7 +150,7 @@ export const SettingsScreen = () => {
         <Text style={styles.panelTitle}>About QRCanvas</Text>
         <Text style={styles.bodyText}>Developer: Old Alex Hub</Text>
         <Text style={styles.bodyText}>Version: 1.0.0</Text>
-        <Text style={styles.bodyText}>One-time paid app. No ads, no subscriptions, no login.</Text>
+        <Text style={styles.bodyText}>Free app. No subscriptions, no login, no data collection.</Text>
       </View>
 
       <Modal visible={importModal} animationType="slide" onRequestClose={() => setImportModal(false)}>

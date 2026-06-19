@@ -6,6 +6,7 @@ import {QRDesignCard} from '../components/QRDesignCard';
 import {PrimaryButton} from '../components/PrimaryButton';
 import {Chip} from '../components/Chip';
 import {EmptyState} from '../components/EmptyState';
+import {useInterstitialWithCap} from '../ads/useInterstitialWithCap';
 import {theme} from '../data/theme';
 import {useAppState} from '../context/AppState';
 import {ExportSize} from '../types';
@@ -19,6 +20,7 @@ export const ExportPreviewScreen = () => {
   const [exportSize, setExportSize] = useState<ExportSize>(settings.defaultExportSize);
   const [exporting, setExporting] = useState(false);
   const exportRef = useRef<View>(null);
+  const {tryShowInterstitial} = useInterstitialWithCap();
 
   if (!project || !project.payload) {
     return (
@@ -40,6 +42,7 @@ export const ExportPreviewScreen = () => {
       await exportViewAsPng(exportRef, {projectTitle: project.title, exportSize});
       await recordProjectExport(project.id);
       Alert.alert('Export ready', 'The PNG was created and opened in the local share flow.');
+      tryShowInterstitial();
     } catch (error) {
       Alert.alert('PNG export failed', error instanceof Error ? error.message : 'The image could not be exported.');
     } finally {

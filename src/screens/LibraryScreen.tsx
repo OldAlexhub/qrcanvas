@@ -7,6 +7,9 @@ import {Chip} from '../components/Chip';
 import {EmptyState} from '../components/EmptyState';
 import {ProjectCard} from '../components/ProjectCard';
 import {PrimaryButton} from '../components/PrimaryButton';
+import {AdBanner} from '../ads/AdBanner';
+import {NativeAdCard} from '../ads/NativeAdCard';
+import {NATIVE_AD_INTERVAL} from '../ads/config';
 import {useAppState} from '../context/AppState';
 import {theme} from '../data/theme';
 import {QR_TYPES, QRType} from '../types';
@@ -87,7 +90,7 @@ export const LibraryScreen = () => {
   };
 
   return (
-    <Screen>
+    <Screen footer={<AdBanner />}>
       <View style={styles.header}>
         <Text style={styles.eyebrow}>Saved Library</Text>
         <Text style={styles.title}>Manage local QR designs</Text>
@@ -120,15 +123,19 @@ export const LibraryScreen = () => {
 
       {filteredProjects.length ? (
         <View style={styles.list}>
-          {filteredProjects.map(project => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              onOpen={() => navigation.navigate('DesignStudio', {projectId: project.id})}
-              onExport={() => navigation.navigate('ExportPreview', {projectId: project.id})}
-              onDuplicate={() => duplicate(project.id)}
-              onDelete={() => confirmDelete(project.id)}
-            />
+          {filteredProjects.map((project, index) => (
+            <React.Fragment key={project.id}>
+              <ProjectCard
+                project={project}
+                onOpen={() => navigation.navigate('DesignStudio', {projectId: project.id})}
+                onExport={() => navigation.navigate('ExportPreview', {projectId: project.id})}
+                onDuplicate={() => duplicate(project.id)}
+                onDelete={() => confirmDelete(project.id)}
+              />
+              {(index + 1) % NATIVE_AD_INTERVAL === 0 && filteredProjects.length >= NATIVE_AD_INTERVAL && (
+                <NativeAdCard />
+              )}
+            </React.Fragment>
           ))}
         </View>
       ) : (

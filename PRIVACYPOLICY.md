@@ -8,7 +8,13 @@ Contact: info@oldalexhub.com
 
 ## Data collection
 
-QRCanvas does not collect personal data. The app does not use accounts, analytics, ads, subscriptions, tracking, cloud sync, or backend services.
+QRCanvas does not collect personal data. The app does not use accounts, subscriptions, tracking, cloud sync, or backend services.
+
+## Advertising
+
+QRCanvas displays ads served by Google AdMob. AdMob may use device identifiers (such as the Android Advertising ID) to serve contextual ads. QRCanvas requests non-personalized ads only and does not pass personal data to AdMob. For more information on how Google uses data in ads, visit https://policies.google.com/technologies/ads.
+
+Users can opt out of interest-based ads through their device settings under Google > Ads > Opt out of Ads Personalization.
 
 ## Local storage
 
@@ -16,7 +22,7 @@ QR content, saved QR projects, templates, and app settings are stored locally on
 
 ## Internet usage
 
-QRCanvas is designed to work offline and does not require an internet connection to create, save, edit, export, import, or delete QR codes.
+QRCanvas works offline for all QR code features (create, save, edit, export, import, delete). An internet connection is used only to load ads via Google AdMob.
 
 ## Permissions
 
